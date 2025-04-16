@@ -15,7 +15,7 @@ jobs:
   qodana:
     name: Qodana
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 35
     permissions:
       checks: write
       contents: read
