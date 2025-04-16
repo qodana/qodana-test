@@ -2,4 +2,4 @@ version: "1.0"
 profile:
   name: qodana.recommended
 projectJDK: corretto-11
-linter: jetbrains/qodana-jvm:2024.3
+linter: registry.jetbrains.team/p/sa/containers/qodana-jvm:2025.1-nightly
