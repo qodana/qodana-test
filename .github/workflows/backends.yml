@@ -15,12 +15,18 @@ jobs:
   qodana:
     name: Qodana
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 35
     permissions:
       checks: write
       contents: read
       pull-requests: read
     steps:
+      - uses: docker/login-action@v3
+        with:
+          registry: registry.jetbrains.team
+          username: ${{ secrets.SPACE_USERNAME }}
+          password: ${{ secrets.SPACE_PASSWORD }}
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -31,10 +37,13 @@ jobs:
         uses: JetBrains/qodana-action@v2024.3
         with:
           artifact-name: qodana-test-backends
-          cache-dir: qodana-test-backends/.cache/qodana
-          primary-cache-key: |
-            qodana-test-backends-${{ runner.os }}-${{ hashFiles('pom.xml') }}
-          additional-cache-key: qodana-test-backends-${{ runner.os }}
           upload-result: true
+          use-caches: false
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TEST_JAVA }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qodana-artifact
+          path: ${{ runner.temp }}/qodana/results

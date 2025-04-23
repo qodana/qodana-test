@@ -15,7 +15,6 @@
     </dependency>
   </dependencies>
   <modules>
-    <module>backend-a</module>
     <module>backend-b</module>
   </modules>
 </project>
