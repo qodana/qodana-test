@@ -3,3 +3,5 @@ profile:
   name: qodana.recommended
 projectJDK: corretto-11
 linter: registry.jetbrains.team/p/sa/containers/qodana-jvm:251-log--maven-reimport
+properties:
+  idea.log.debug.categories=#org.jetbrains.idea.maven
