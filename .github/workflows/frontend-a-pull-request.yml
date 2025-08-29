@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
       - main
+      - Update-license-audit
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref && github.ref_name || github.run_id }}

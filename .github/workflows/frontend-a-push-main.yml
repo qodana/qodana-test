@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - Update-license-audit
     paths:
       - "frontend-a/**"
       - ".github/workflows/frontend-a-push-main.yml"
