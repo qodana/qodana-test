@@ -55,13 +55,20 @@ jobs:
         shell: bash
         working-directory: frontend-a
 
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          registry: registry.jetbrains.team
+          username: ${{ secrets.SPACE_USERNAME }}
+          password: ${{ secrets.SPACE_PASSWORD }}
+
       - name: Qodana Scan
         if: steps.changed-files.outputs.any_changed == 'true'
-        uses: JetBrains/qodana-action@v2024.3
+        uses: JetBrains/qodana-action@v2025.2
         with:
           args: |
             --source-directory,frontend-a,
-            --linter,jetbrains/qodana-js:2024.3,
+            --image,registry.jetbrains.team/p/sa/containers/qodana-js:2025.3-nightly,
             --config,frontend-a/qodana-pull-request.yaml,
             --fail-threshold,0
           artifact-name: qodana-test
